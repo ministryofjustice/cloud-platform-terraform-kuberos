@@ -42,12 +42,12 @@ resource "helm_release" "kuberos" {
       "login.apps",
       var.cluster_domain_name,
     )
-    cluster_name             = var.cluster_domain_name
-    cluster_address          = var.cluster_address
-    issuer_url               = var.oidc_issuer_url
-    client_id                = var.oidc_kubernetes_client_id
-    client_secret            = var.oidc_kubernetes_client_secret
-    replicaCount             = 2
+    cluster_name    = var.cluster_domain_name
+    cluster_address = var.cluster_address
+    issuer_url      = var.oidc_issuer_url
+    client_id       = var.oidc_kubernetes_client_id
+    client_secret   = var.oidc_kubernetes_client_secret
+    replicaCount    = 2
   })]
 
   lifecycle {
