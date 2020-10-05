@@ -1,3 +1,8 @@
+locals {
+  live_workspace = "live-1"
+  live_domain    = "cloud-platform.service.justice.gov.uk"
+}
+
 #############
 # Namespace #
 #############
@@ -56,3 +61,46 @@ resource "helm_release" "kuberos" {
   }
 }
 
+####################
+# Network Policies #
+####################
+
+resource "kubernetes_network_policy" "default" {
+  metadata {
+    name      = "default"
+    namespace = kubernetes_namespace.kuberos.id
+  }
+
+  spec {
+    pod_selector {}
+    ingress {
+      from {
+        pod_selector {}
+      }
+    }
+
+    policy_types = ["Ingress"]
+  }
+}
+
+resource "kubernetes_network_policy" "allow_ingress_controllers" {
+  metadata {
+    name      = "allow-ingress-controllers"
+    namespace = kubernetes_namespace.kuberos.id
+  }
+
+  spec {
+    pod_selector {}
+    ingress {
+      from {
+        namespace_selector {
+          match_labels = {
+            component = "ingress-controllers"
+          }
+        }
+      }
+    }
+
+    policy_types = ["Ingress"]
+  }
+}
