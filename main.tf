@@ -104,3 +104,20 @@ resource "kubernetes_network_policy" "allow_ingress_controllers" {
     policy_types = ["Ingress"]
   }
 }
+
+##################
+# Resource Quota #
+##################
+
+resource "kubernetes_resource_quota" "namespace_quota" {
+  metadata {
+    name = "namespace-quota"
+    namespace = kubernetes_namespace.kuberos.id
+  }
+  spec {
+    hard = {
+      pods = 50
+    }
+  }
+}
+
