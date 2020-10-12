@@ -111,7 +111,7 @@ resource "kubernetes_network_policy" "allow_ingress_controllers" {
 
 resource "kubernetes_resource_quota" "namespace_quota" {
   metadata {
-    name = "namespace-quota"
+    name      = "namespace-quota"
     namespace = kubernetes_namespace.kuberos.id
   }
   spec {
