@@ -150,6 +150,8 @@ resource "kubernetes_limit_range" "kuberos" {
 ###########
 
 resource "kubernetes_ingress" "aws_redirect" {
+  count = var.create_aws_redirect ? 1 : 0
+
   metadata {
     name      = "aws-redirect"
     namespace = kubernetes_namespace.kuberos.id
@@ -173,5 +175,3 @@ resource "kubernetes_ingress" "aws_redirect" {
     }
   }
 }
-
-
