@@ -104,3 +104,79 @@ resource "kubernetes_network_policy" "allow_ingress_controllers" {
     policy_types = ["Ingress"]
   }
 }
+
+##################
+# Resource Quota #
+##################
+
+resource "kubernetes_resource_quota" "namespace_quota" {
+  metadata {
+    name      = "namespace-quota"
+    namespace = kubernetes_namespace.kuberos.id
+  }
+  spec {
+    hard = {
+      pods = 50
+    }
+  }
+}
+
+##############
+# LimitRange #
+##############
+
+resource "kubernetes_limit_range" "kuberos" {
+  metadata {
+    name      = "limitrange"
+    namespace = kubernetes_namespace.kuberos.id
+  }
+  spec {
+    limit {
+      type = "Container"
+      default = {
+        cpu    = "20m"
+        memory = "500Mi"
+      }
+      default_request = {
+        cpu    = "2m"
+        memory = "50Mi"
+      }
+    }
+  }
+}
+
+###########
+# Ingress #
+###########
+
+resource "kubernetes_ingress" "aws_redirect" {
+  metadata {
+    name      = "aws-redirect"
+    namespace = kubernetes_namespace.kuberos.id
+  }
+
+  spec {
+    backend {
+      service_name = "MyApp1"
+      service_port = 8080
+    }
+
+    rule {
+      host = "aws-login.cloud-platform.service.justice.gov.uk"
+      http {
+        path {
+          backend {
+            service_name = "kuberos"
+            service_port = 80
+          }
+        }
+      }
+    }
+
+    tls {
+      hosts = ["aws-login.cloud-platform.service.justice.gov.uk"]
+    }
+  }
+}
+
+
