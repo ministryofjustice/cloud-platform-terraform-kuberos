@@ -156,11 +156,6 @@ resource "kubernetes_ingress" "aws_redirect" {
   }
 
   spec {
-    backend {
-      service_name = "MyApp1"
-      service_port = 8080
-    }
-
     rule {
       host = "aws-login.cloud-platform.service.justice.gov.uk"
       http {
