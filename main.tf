@@ -19,10 +19,11 @@ resource "kubernetes_namespace" "kuberos" {
 
     annotations = {
       "cloud-platform.justice.gov.uk/application"   = "Kuberos"
-      "cloud-platform.justice.gov.uk/business-unit" = "cloud-platform"
+      "cloud-platform.justice.gov.uk/business-unit" = "Platforms"
       "cloud-platform.justice.gov.uk/owner"         = "Cloud Platform: platforms@digital.justice.gov.uk"
       "cloud-platform.justice.gov.uk/source-code"   = "https://github.com/ministryofjustice/kuberos"
       "cloud-platform.justice.gov.uk/slack-channel" = "cloud-platform"
+      "cloud-platform-out-of-hours-alert"           = "true"
     }
   }
 }
