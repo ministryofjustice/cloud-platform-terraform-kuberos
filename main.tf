@@ -28,18 +28,11 @@ resource "kubernetes_namespace" "kuberos" {
   }
 }
 
-# cloud platform helm chart repository
-data "helm_repository" "cloud_platform" {
-  name = "cloud-platform"
-  url  = "https://ministryofjustice.github.io/cloud-platform-helm-charts"
-}
-
-
 resource "helm_release" "kuberos" {
   name          = "kuberos"
   namespace     = kubernetes_namespace.kuberos.id
   chart         = "kuberos"
-  repository    = data.helm_repository.cloud_platform.metadata[0].name
+  repository    = "https://ministryofjustice.github.io/cloud-platform-helm-charts"
   recreate_pods = true
   version       = "0.2.0"
 
