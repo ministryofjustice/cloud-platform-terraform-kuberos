@@ -34,7 +34,7 @@ resource "helm_release" "kuberos" {
   chart         = "kuberos"
   repository    = "https://ministryofjustice.github.io/cloud-platform-helm-charts"
   recreate_pods = true
-  version       = "0.3.1"
+  version       = "0.3.2"
 
   values = [templatefile("${path.module}/templates/kuberos.yaml.tpl", {
     hostname = terraform.workspace == local.live_workspace ? format("%s.%s", "login", local.live_domain) : format(
