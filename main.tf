@@ -39,7 +39,7 @@ resource "helm_release" "kuberos" {
   values = [templatefile("${path.module}/templates/kuberos.yaml.tpl", {
     hostname = terraform.workspace == local.live_workspace ? format("%s.%s", "login", local.live_domain) : format(
       "%s.%s",
-      "login.apps",
+      "login",
       var.cluster_domain_name,
     )
     cluster_name    = var.cluster_domain_name
@@ -48,6 +48,7 @@ resource "helm_release" "kuberos" {
     client_id       = var.oidc_kubernetes_client_id
     client_secret   = var.oidc_kubernetes_client_secret
     replicaCount    = 2
+    clusterName     = terraform.workspace
   })]
 
   lifecycle {

@@ -5,6 +5,9 @@
 replicaCount: "${replicaCount}"
 
 ingress:
+  annotations:
+    external-dns.alpha.kubernetes.io/aws-weight: "100"
+    external-dns.alpha.kubernetes.io/set-identifier: "dns-${clusterName}"
   host: "${hostname}"
   tls:
     - host:
