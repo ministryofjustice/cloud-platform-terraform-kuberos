@@ -11,7 +11,7 @@ ingress:
     cloud-platform.justice.gov.uk/ignore-external-dns-weight: "true"
   host: "${hostname}"
   tls:
-    - host:
+    - hosts:
       - "${hostname}"
 
 # These values will be supplied by the OIDC provider.
