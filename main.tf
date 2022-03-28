@@ -1,6 +1,12 @@
 locals {
-  live_workspace = "live-1"
-  live_domain    = "cloud-platform.service.justice.gov.uk"
+  live_workspace   = "live"
+  live_domain      = "cloud-platform.service.justice.gov.uk"
+  ingress_redirect = terraform.workspace == local.live_workspace ? true : false
+  kuberos_root = format(
+    "%s.%s",
+    "login",
+    var.cluster_domain_name,
+  )
 }
 
 #############
@@ -150,8 +156,10 @@ resource "kubernetes_ingress" "aws_redirect" {
   metadata {
     name      = "aws-redirect"
     namespace = kubernetes_namespace.kuberos.id
+    annotations = {
+      "cloud-platform.justice.gov.uk/ignore-external-dns-weight" = "true"
+    }
   }
-
   spec {
     rule {
       host = "aws-login.cloud-platform.service.justice.gov.uk"
@@ -167,6 +175,36 @@ resource "kubernetes_ingress" "aws_redirect" {
 
     tls {
       hosts = ["aws-login.cloud-platform.service.justice.gov.uk"]
+    }
+  }
+}
+
+
+resource "kubernetes_ingress" "ingress_redirect_kuberos" {
+  count = local.ingress_redirect ? 1 : 0
+  metadata {
+    name      = "ingress-redirect-kuberos"
+    namespace = kubernetes_namespace.kuberos.id
+    annotations = {
+      "cloud-platform.justice.gov.uk/ignore-external-dns-weight" = "true"
+      "nginx.ingress.kubernetes.io/permanent-redirect"           = "https://login.${local.live_domain}"
+    }
+  }
+  spec {
+    tls {
+      hosts = [local.kuberos_root]
+    }
+    rule {
+      host = local.kuberos_root
+      http {
+        path {
+          path = ""
+          backend {
+            service_name = "kuberos"
+            service_port = 80
+          }
+        }
+      }
     }
   }
 }
