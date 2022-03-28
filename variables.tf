@@ -17,9 +17,3 @@ variable "oidc_kubernetes_client_secret" {
 variable "oidc_issuer_url" {
   description = "Issuer URL used to authenticate to kuberos"
 }
-
-variable "create_aws_redirect" {
-  description = "If true, it creates aws-redirect ingress which is used for AWS auth0 auth. It should only be created in live cluster(s)"
-  default     = false
-  type        = bool
-}
