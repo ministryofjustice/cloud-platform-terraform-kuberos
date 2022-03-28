@@ -150,35 +150,8 @@ resource "kubernetes_limit_range" "kuberos" {
 # Ingress #
 ###########
 
-resource "kubernetes_ingress" "aws_redirect" {
-  count = var.create_aws_redirect ? 1 : 0
-
-  metadata {
-    name      = "aws-redirect"
-    namespace = kubernetes_namespace.kuberos.id
-    annotations = {
-      "cloud-platform.justice.gov.uk/ignore-external-dns-weight" = "true"
-    }
-  }
-  spec {
-    rule {
-      host = "aws-login.cloud-platform.service.justice.gov.uk"
-      http {
-        path {
-          backend {
-            service_name = "kuberos"
-            service_port = 80
-          }
-        }
-      }
-    }
-
-    tls {
-      hosts = ["aws-login.cloud-platform.service.justice.gov.uk"]
-    }
-  }
-}
-
+# This is to redirect "https://login.live.cloud-platform.service.justice.gov.uk/" to
+# "https://login.cloud-platform.service.justice.gov.uk/"
 
 resource "kubernetes_ingress" "ingress_redirect_kuberos" {
   count = local.ingress_redirect ? 1 : 0
