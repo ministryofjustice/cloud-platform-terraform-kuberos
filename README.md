@@ -33,3 +33,7 @@ module "kuberos" {
 ## Reading Material
 
 Click [here](https://github.com/helm/charts/tree/master/stable/kuberos#configuration) for the kuberos documentation.
+
+## Note
+
+The "main" branch stores the releases for EKS, and the "last-kops-release-do-not-delete" serves as a kops cluster features branch, which was used for "live-1" cluster.
