@@ -1,9 +1,9 @@
-data {
-  terraform_remote_state.cluster.outputs.cluster_domain_name = "test.com"
-  terraform_remote_state.cluster.outputs.oidc_kubernetes_client_id = "test"
-  terraform_remote_state.cluster.outputs.oidc_kubernetes_client_secret = "test"
-  terraform_remote_state.cluster.outputs.oidc_issuer_url = "https://test"
-  terraform_remote_state.cluster.outputs.cluster_endpoint = "https://test"
+data "terraform_remote_state.cluster.outputs" {
+  cluster_domain_name           = "test.com"
+  oidc_kubernetes_client_id     = "test"
+  oidc_kubernetes_client_secret = "test"
+  oidc_issuer_url               = "https://test"
+  cluster_endpoint              = "https://test"
 }
 
 module "kuberos" {
