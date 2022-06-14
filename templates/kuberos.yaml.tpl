@@ -3,13 +3,13 @@
 # Declare variables to be passed into your templates.
 
 replicaCount: "${replicaCount}"
-className: default
+
 ingress:
   annotations:
     external-dns.alpha.kubernetes.io/aws-weight: "100"
     external-dns.alpha.kubernetes.io/set-identifier: "dns-${clusterName}"
     cloud-platform.justice.gov.uk/ignore-external-dns-weight: "true"
-  
+  className: default
   host: "${hostname}"
   tls:
     - hosts:
