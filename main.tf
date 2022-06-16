@@ -154,13 +154,13 @@ resource "kubernetes_limit_range" "kuberos" {
 # "https://login.cloud-platform.service.justice.gov.uk/"
 
 resource "kubernetes_ingress_v1" "ingress_redirect_kuberos" {
-  count = 1
+    count = local.ingress_redirect ? 1 : 0
   metadata {
     name      = "ingress-redirect-kuberos"
     namespace = kubernetes_namespace.kuberos.id
     annotations = {
       "cloud-platform.justice.gov.uk/ignore-external-dns-weight" = "true"
-      "nginx.ingress.kubernetes.io/permanent-redirect"           = "https://grafana.cp-0606-1159.cloud-platform.service.justice.gov.uk"
+      "nginx.ingress.kubernetes.io/permanent-redirect"           = "https://login.${local.live_domain}"
     }
   }
   spec {
