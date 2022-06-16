@@ -153,8 +153,8 @@ resource "kubernetes_limit_range" "kuberos" {
 # This is to redirect "https://login.live.cloud-platform.service.justice.gov.uk/" to
 # "https://login.cloud-platform.service.justice.gov.uk/"
 
-resource "kubernetes_ingress" "ingress_redirect_kuberos" {
-  count = local.ingress_redirect ? 1 : 0
+resource "kubernetes_ingress_v1" "ingress_redirect_kuberos" {
+    count = local.ingress_redirect ? 1 : 0
   metadata {
     name      = "ingress-redirect-kuberos"
     namespace = kubernetes_namespace.kuberos.id
@@ -164,6 +164,7 @@ resource "kubernetes_ingress" "ingress_redirect_kuberos" {
     }
   }
   spec {
+    ingress_class_name = "default"
     tls {
       hosts = [local.kuberos_root]
     }
@@ -173,8 +174,12 @@ resource "kubernetes_ingress" "ingress_redirect_kuberos" {
         path {
           path = ""
           backend {
-            service_name = "kuberos"
-            service_port = 80
+            service {
+              name = "kuberos"
+              port {
+                number = 80
+              }
+            }
           }
         }
       }
