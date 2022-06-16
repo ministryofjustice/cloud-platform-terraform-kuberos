@@ -164,6 +164,7 @@ resource "kubernetes_ingress" "ingress_redirect_kuberos" {
     }
   }
   spec {
+    ingress_class_name = "default"
     tls {
       hosts = [local.kuberos_root]
     }
