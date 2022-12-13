@@ -154,7 +154,7 @@ resource "kubernetes_limit_range" "kuberos" {
 # "https://login.cloud-platform.service.justice.gov.uk/"
 
 resource "kubernetes_ingress_v1" "ingress_redirect_kuberos" {
-    count = local.ingress_redirect ? 1 : 0
+  count = local.ingress_redirect ? 1 : 0
   metadata {
     name      = "ingress-redirect-kuberos"
     namespace = kubernetes_namespace.kuberos.id
