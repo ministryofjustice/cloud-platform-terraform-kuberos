@@ -51,12 +51,19 @@ resource "helm_release" "kuberos" {
     cluster_name    = var.cluster_domain_name
     cluster_address = var.cluster_address
     issuer_url      = var.oidc_issuer_url
-    client_id       = var.oidc_kubernetes_client_id
-    client_secret   = var.oidc_kubernetes_client_secret
     replicaCount    = 2
     clusterName     = terraform.workspace
   })]
 
+  set_sensitive {
+    name = "oidc.clientId"
+    value = var.oidc_kubernetes_client_id
+  }
+
+  set_sensitive {
+    name = "oidc.clientSecret"
+    value = var.oidc_kubernetes_client_secret
+  }
   lifecycle {
     ignore_changes = [keyring]
   }
