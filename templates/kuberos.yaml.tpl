@@ -18,8 +18,8 @@ ingress:
 # These values will be supplied by the OIDC provider.
 oidc:
   issuerUrl: "${issuer_url}"
-  clientId: "${client_id}"
-  clientSecret: "${client_secret}"
+  clientId:
+  clientSecret:
 
 # Cluster specific values, replace `address` with the external URL to the
 # kubernetes API. If you leave `ca` empty, kuberos will use the current
