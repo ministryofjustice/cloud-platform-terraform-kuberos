@@ -21,6 +21,7 @@ resource "kubernetes_namespace" "kuberos" {
       "name"                                           = "kuberos"
       "cloud-platform.justice.gov.uk/environment-name" = "production"
       "cloud-platform.justice.gov.uk/is-production"    = "true"
+      "pod-security.kubernetes.io/audit"               = "privileged"
     }
 
     annotations = {
@@ -56,12 +57,12 @@ resource "helm_release" "kuberos" {
   })]
 
   set_sensitive {
-    name = "oidc.clientId"
+    name  = "oidc.clientId"
     value = var.oidc_kubernetes_client_id
   }
 
   set_sensitive {
-    name = "oidc.clientSecret"
+    name  = "oidc.clientSecret"
     value = var.oidc_kubernetes_client_secret
   }
   lifecycle {
