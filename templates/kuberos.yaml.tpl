@@ -4,6 +4,9 @@
 
 replicaCount: "${replicaCount}"
 
+image:
+  tag: "${image_tag}"
+
 ingress:
   annotations:
     external-dns.alpha.kubernetes.io/aws-weight: "100"
