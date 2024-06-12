@@ -54,7 +54,7 @@ resource "helm_release" "kuberos" {
     issuer_url      = var.oidc_issuer_url
     replicaCount    = 2
     clusterName     = terraform.workspace
-    image_tag      = var.image_tag
+    image_tag       = var.image_tag
   })]
 
   set_sensitive {
