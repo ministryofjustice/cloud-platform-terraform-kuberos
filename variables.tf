@@ -15,5 +15,5 @@ variable "oidc_kubernetes_client_secret" {
 }
 
 variable "oidc_issuer_url" {
-  description = "Issuer URL used to authenticate to kuberos"
+  description = "Issuer URL used to authenticate to kuberos - test dependabot pr"
 }
