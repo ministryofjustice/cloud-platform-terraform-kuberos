@@ -10,7 +10,7 @@ Terraform module that deploy cloud-platform kuberos. Kuberos is an OIDC authenti
 
 See the [examples/](examples/) folder.
 
-<!--- BEGIN_TF_DOCS --->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -56,7 +56,7 @@ No modules.
 
 No outputs.
 
-<!--- END_TF_DOCS --->
+<!-- END_TF_DOCS -->
 
 ## Reading Material
 
