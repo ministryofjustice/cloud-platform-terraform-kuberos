@@ -48,14 +48,13 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_cluster_address"></a> [cluster\_address](#input\_cluster\_address) | The cluster address - used by kuberos | `any` | n/a | yes |
 | <a name="input_cluster_domain_name"></a> [cluster\_domain\_name](#input\_cluster\_domain\_name) | The cluster domain - used by kuberos | `any` | n/a | yes |
-| <a name="input_oidc_issuer_url"></a> [oidc\_issuer\_url](#input\_oidc\_issuer\_url) | Issuer URL used to authenticate to kuberos | `any` | n/a | yes |
+| <a name="input_oidc_issuer_url"></a> [oidc\_issuer\_url](#input\_oidc\_issuer\_url) | Issuer URL used to authenticate to kuberos - test dependabot pr | `any` | n/a | yes |
 | <a name="input_oidc_kubernetes_client_id"></a> [oidc\_kubernetes\_client\_id](#input\_oidc\_kubernetes\_client\_id) | OIDC ClientID used to authenticate to kuberos | `any` | n/a | yes |
 | <a name="input_oidc_kubernetes_client_secret"></a> [oidc\_kubernetes\_client\_secret](#input\_oidc\_kubernetes\_client\_secret) | OIDC ClientSecret used to authenticate to kuberos | `any` | n/a | yes |
 
 ## Outputs
 
 No outputs.
-
 <!-- END_TF_DOCS -->
 
 ## Reading Material
