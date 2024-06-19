@@ -14,5 +14,6 @@ module "kuberos" {
   cluster_address = "https://test"
   # cluster_address               = data.terraform_remote_state.cluster.outputs.cluster_endpoint
 
+  image_tag = "0.4.0"
   # depends_on = [module.ingress_controllers]
 }
