@@ -21,7 +21,7 @@ resource "kubernetes_namespace" "kuberos" {
       "name"                                           = "kuberos"
       "cloud-platform.justice.gov.uk/environment-name" = "production"
       "cloud-platform.justice.gov.uk/is-production"    = "true"
-      "pod-security.kubernetes.io/audit"               = "privileged"
+      "pod-security.kubernetes.io/enforce"             = "privileged"
     }
 
     annotations = {
@@ -41,7 +41,7 @@ resource "helm_release" "kuberos" {
   chart         = "kuberos"
   repository    = "https://ministryofjustice.github.io/cloud-platform-helm-charts"
   recreate_pods = true
-  version       = "0.3.10"
+  version       = "0.4.0"
 
   values = [templatefile("${path.module}/templates/kuberos.yaml.tpl", {
     hostname = terraform.workspace == local.live_workspace ? format("%s.%s", "login", local.live_domain) : format(
@@ -54,6 +54,7 @@ resource "helm_release" "kuberos" {
     issuer_url      = var.oidc_issuer_url
     replicaCount    = 2
     clusterName     = terraform.workspace
+    image_tag       = var.image_tag
   })]
 
   set_sensitive {

@@ -17,3 +17,7 @@ variable "oidc_kubernetes_client_secret" {
 variable "oidc_issuer_url" {
   description = "Issuer URL used to authenticate to kuberos"
 }
+
+variable "image_tag" {
+  description = "The image tag to use for the kuberos deployment"
+}
