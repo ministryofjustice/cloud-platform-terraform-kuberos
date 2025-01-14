@@ -52,6 +52,7 @@ No modules.
 | <a name="input_oidc_issuer_url"></a> [oidc\_issuer\_url](#input\_oidc\_issuer\_url) | Issuer URL used to authenticate to kuberos | `any` | n/a | yes |
 | <a name="input_oidc_kubernetes_client_id"></a> [oidc\_kubernetes\_client\_id](#input\_oidc\_kubernetes\_client\_id) | OIDC ClientID used to authenticate to kuberos | `any` | n/a | yes |
 | <a name="input_oidc_kubernetes_client_secret"></a> [oidc\_kubernetes\_client\_secret](#input\_oidc\_kubernetes\_client\_secret) | OIDC ClientSecret used to authenticate to kuberos | `any` | n/a | yes |
+| <a name="input_replica_count"></a> [replica\_count](#input\_replica\_count) | the num of replicas for kuberos | `number` | `2` | no |
 
 ## Outputs
 
