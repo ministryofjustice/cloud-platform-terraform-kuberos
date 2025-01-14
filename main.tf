@@ -52,7 +52,7 @@ resource "helm_release" "kuberos" {
     cluster_name    = var.cluster_domain_name
     cluster_address = var.cluster_address
     issuer_url      = var.oidc_issuer_url
-    replicaCount    = 2
+    replicaCount    = var.replica_count
     clusterName     = terraform.workspace
     image_tag       = var.image_tag
   })]

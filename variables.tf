@@ -21,3 +21,9 @@ variable "oidc_issuer_url" {
 variable "image_tag" {
   description = "The image tag to use for the kuberos deployment"
 }
+
+variable "replica_count" {
+  description = "the num of replicas for kuberos"
+  default     = 2
+  type        = number
+}
