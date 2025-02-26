@@ -169,6 +169,8 @@ resource "kubernetes_ingress_v1" "ingress_redirect_kuberos" {
     namespace = kubernetes_namespace.kuberos.id
     annotations = {
       "cloud-platform.justice.gov.uk/ignore-external-dns-weight" = "true"
+      "external-dns.alpha.kubernetes.io/aws-weight"              = "100"
+      "external-dns.alpha.kubernetes.io/set-identifier"          = "dns-${var.cluster_domain_name}-kuberos-redirect"
       "nginx.ingress.kubernetes.io/permanent-redirect"           = "https://login.${local.live_domain}"
     }
   }
