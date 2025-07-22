@@ -57,15 +57,16 @@ resource "helm_release" "kuberos" {
     image_tag       = var.image_tag
   })]
 
-  set_sensitive {
-    name  = "oidc.clientId"
-    value = var.oidc_kubernetes_client_id
-  }
-
-  set_sensitive {
-    name  = "oidc.clientSecret"
-    value = var.oidc_kubernetes_client_secret
-  }
+  set_sensitive = [
+    {
+      name  = "oidc.clientId"
+      value = var.oidc_kubernetes_client_id
+    },
+    {
+      name  = "oidc.clientSecret"
+      value = var.oidc_kubernetes_client_secret
+    }
+  ]
   lifecycle {
     ignore_changes = [keyring]
   }
